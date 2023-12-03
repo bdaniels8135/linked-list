@@ -42,7 +42,7 @@ class LinkedList {
     return this.#tail.value;
   }
 
-  at(index) {
+  #at(index) {
     if (index < 0 || index > this.size - 1) return null;
     let currentNode = this.#head;
     let currentIndex = 0;
@@ -50,7 +50,12 @@ class LinkedList {
       currentNode = currentNode.nextNode;
       currentIndex += 1;
     }
-    return currentNode.value;
+    return currentNode;
+  }
+
+  at(index) {
+    const nodeAtIndex = this.#at(index);
+    return nodeAtIndex ? nodeAtIndex.value : null;
   }
 
   pop() {
@@ -97,14 +102,29 @@ class LinkedList {
     return printString;
   }
 
-  insertAt(value, index) {}
+  insertAt(value, index) {
+    if (index <= 0) {
+      this.prepend(value);
+      return this;
+    }
+    if (index >= this.#size) {
+      this.append(value);
+      return this;
+    }
+    this.#size += 1;
+    const nodeToInsertAfter = this.#at(index - 1);
+    const nodeToInsertBefore = nodeToInsertAfter.nextNode;
+    const newNode = new Node(value, nodeToInsertBefore);
+    nodeToInsertAfter.nextNode = newNode;
+    return this;
+  }
 
   removeAt(index) {}
 }
 
 const linkedList = new LinkedList();
 
-linkedList.append("First!").append("Second!").prepend("Now I am first");
+linkedList.append("First!").append("Second!").prepend("Now I am first!");
 
 console.log(linkedList.toString());
 console.log(linkedList.size);
@@ -118,5 +138,10 @@ console.log(linkedList.contains("Third"));
 console.log(linkedList.find("Not here!"));
 console.log(linkedList.find("First!"));
 console.log(linkedList.pop());
+linkedList
+  .insertAt("Inserted at 1!", 1)
+  .insertAt("Used neg index", -5)
+  .insertAt("Inserted at 0", 0)
+  .insertAt("Used big index!", 100);
 console.log(linkedList.toString());
 console.log(linkedList.size);
