@@ -109,12 +109,9 @@ class LinkedList {
   }
 
   insertAt(value, index) {
-    if (index <= 0) {
-      return this.prepend(value);
-    }
-    if (index >= this.#size) {
-      return this.append(value);
-    }
+    if (index < 0) return null;
+    if (index === 0) return this.prepend(value);
+    if (index >= this.#size) return this.append(value);
     this.#size += 1;
     const nodeToInsertAfter = this.#at(index - 1);
     const nodeToInsertBefore = nodeToInsertAfter.nextNode;
@@ -123,7 +120,17 @@ class LinkedList {
     return this;
   }
 
-  removeAt(index) {}
+  removeAt(index) {
+    if (index < 0 || index >= this.#size) {
+      return null;
+    }
+    this.#size += 1;
+    const nodeToInsertAfter = this.#at(index - 1);
+    const nodeToInsertBefore = nodeToInsertAfter.nextNode;
+    const newNode = new Node(value, nodeToInsertBefore);
+    nodeToInsertAfter.nextNode = newNode;
+    return this;
+  }
 }
 
 const linkedList = new LinkedList();
@@ -144,7 +151,6 @@ console.log(linkedList.find("First!"));
 console.log(linkedList.pop());
 linkedList
   .insertAt("Inserted at 1!", 1)
-  .insertAt("Used neg index", -5)
   .insertAt("Inserted at 0", 0)
   .insertAt("Used big index!", 100);
 console.log(linkedList.toString());
