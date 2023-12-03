@@ -58,7 +58,14 @@ class LinkedList {
     return currentNode.value;
   }
 
-  contains(value) {}
+  contains(value) {
+    let currentNode = this.#head;
+    while (currentNode.nextNode != null) {
+      if (currentNode.value === value) return true;
+      currentNode = currentNode.nextNode;
+    }
+    return currentNode.value === value;
+  }
 
   find(value) {}
 
@@ -86,3 +93,6 @@ console.log(linkedList.at(4));
 console.log(linkedList.pop());
 console.log(linkedList.list);
 console.log(linkedList.size);
+console.log(linkedList.contains(0));
+console.log(linkedList.contains("First!"));
+console.log(linkedList.contains("Third"));
