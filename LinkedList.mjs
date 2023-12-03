@@ -71,6 +71,12 @@ class LinkedList {
     return currentNode.value;
   }
 
+  shift() {
+    const oldHead = this.#head;
+    this.#head = this.#head.nextNode;
+    return oldHead.value;
+  }
+
   contains(value) {
     let currentNode = this.#head;
     while (currentNode.nextNode != null) {
@@ -104,12 +110,10 @@ class LinkedList {
 
   insertAt(value, index) {
     if (index <= 0) {
-      this.prepend(value);
-      return this;
+      return this.prepend(value);
     }
     if (index >= this.#size) {
-      this.append(value);
-      return this;
+      return this.append(value);
     }
     this.#size += 1;
     const nodeToInsertAfter = this.#at(index - 1);
@@ -145,3 +149,5 @@ linkedList
   .insertAt("Used big index!", 100);
 console.log(linkedList.toString());
 console.log(linkedList.size);
+console.log(linkedList.shift());
+console.log(linkedList.toString());
