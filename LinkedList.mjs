@@ -131,30 +131,3 @@ class LinkedList {
     return this;
   }
 }
-
-const linkedList = new LinkedList();
-
-linkedList.append("First!").append("Second!").prepend("Now I am first!");
-
-console.log(linkedList.toString());
-console.log(linkedList.size);
-console.log(linkedList.at(-5));
-console.log(linkedList.at(0));
-console.log(linkedList.at(1));
-console.log(linkedList.at(4));
-console.log(linkedList.contains(0));
-console.log(linkedList.contains("First!"));
-console.log(linkedList.contains("Third"));
-console.log(linkedList.find("Not here!"));
-console.log(linkedList.find("First!"));
-console.log(linkedList.pop());
-linkedList
-  .insertAt("Inserted at 1!", 1)
-  .insertAt("Inserted at 0", 0)
-  .insertAt("Used big index!", 100);
-console.log(linkedList.toString());
-console.log(linkedList.size);
-console.log(linkedList.shift());
-linkedList.removeAt(2);
-console.log(linkedList.toString());
-console.log(linkedList.size);
