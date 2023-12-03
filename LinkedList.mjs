@@ -86,22 +86,27 @@ class LinkedList {
     return currentNode.value === value ? currentIndex : null;
   }
 
-  toString() {}
+  toString() {
+    let printString = "";
+    let currentNode = this.#head;
+    while (currentNode.nextNode != null) {
+      printString += `( ${currentNode.value} ) -> `;
+      currentNode = currentNode.nextNode;
+    }
+    printString += `( ${currentNode.value} ) -> null`;
+    return printString;
+  }
 
   insertAt(value, index) {}
 
   removeAt(index) {}
-
-  get list() {
-    return this.#head;
-  }
 }
 
 const linkedList = new LinkedList();
 
 linkedList.append("First!").append("Second!").prepend("Now I am first");
 
-console.log(linkedList.list);
+console.log(linkedList.toString());
 console.log(linkedList.size);
 console.log(linkedList.at(-5));
 console.log(linkedList.at(0));
@@ -113,5 +118,5 @@ console.log(linkedList.contains("Third"));
 console.log(linkedList.find("Not here!"));
 console.log(linkedList.find("First!"));
 console.log(linkedList.pop());
-console.log(linkedList.list);
+console.log(linkedList.toString());
 console.log(linkedList.size);
