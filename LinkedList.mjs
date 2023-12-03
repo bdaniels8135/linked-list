@@ -34,6 +34,14 @@ class LinkedList {
     return this.#size;
   }
 
+  get head() {
+    return this.#head.value;
+  }
+
+  get tail() {
+    return this.#tail.value;
+  }
+
   at(index) {
     if (index < 0) return null;
     let currentNode = this.#head;
