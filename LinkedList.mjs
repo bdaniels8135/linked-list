@@ -19,6 +19,7 @@ class LinkedList {
     this.#tail = newNode;
     if (this.#head == null) this.#head = newNode;
     this.#size += 1;
+    return this;
   }
 
   prepend(value) {
@@ -26,15 +27,35 @@ class LinkedList {
     this.#head = newNode;
     if (this.#tail == null) this.#tail = newNode;
     this.#size += 1;
+    return this;
   }
 
   get size() {
     return this.#size;
   }
 
-  at(index) {}
+  at(index) {
+    if (index < 0) return null;
+    let currentNode = this.#head;
+    let currentIndex = 0;
+    while (currentNode.nextNode != null && currentIndex < index) {
+      currentNode = currentNode.nextNode;
+      currentIndex += 1;
+    }
+    return index === currentIndex ? currentNode.value : null;
+  }
 
-  pop() {}
+  pop() {
+    let prevNode;
+    let currentNode = this.#head;
+    while (currentNode.nextNode != null) {
+      prevNode = currentNode;
+      currentNode = currentNode.nextNode;
+    }
+    prevNode.nextNode = null;
+    this.#tail = prevNode;
+    return currentNode.value;
+  }
 
   contains(value) {}
 
@@ -46,16 +67,20 @@ class LinkedList {
 
   removeAt(index) {}
 
-  get head() {
+  get list() {
     return this.#head;
   }
 }
 
 const linkedList = new LinkedList();
 
-linkedList.append("First!");
-linkedList.append("Second!");
-linkedList.prepend("Now I am first");
+linkedList.append("First!").append("Second!").prepend("Now I am first");
 
-console.log(linkedList.head);
+console.log(linkedList.list);
 console.log(linkedList.size);
+console.log(linkedList.at(-5));
+console.log(linkedList.at(0));
+console.log(linkedList.at(1));
+console.log(linkedList.at(4));
+console.log(linkedList.pop());
+console.log(linkedList.list);
