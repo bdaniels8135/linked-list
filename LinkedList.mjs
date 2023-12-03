@@ -75,7 +75,16 @@ class LinkedList {
     return currentNode.value === value;
   }
 
-  find(value) {}
+  find(value) {
+    let currentNode = this.#head;
+    let currentIndex = 0;
+    while (currentNode.nextNode != null) {
+      if (currentNode.value === value) return currentIndex;
+      currentNode = currentNode.nextNode;
+      currentIndex += 1;
+    }
+    return currentNode.value === value ? currentIndex : null;
+  }
 
   toString() {}
 
@@ -98,9 +107,11 @@ console.log(linkedList.at(-5));
 console.log(linkedList.at(0));
 console.log(linkedList.at(1));
 console.log(linkedList.at(4));
-console.log(linkedList.pop());
-console.log(linkedList.list);
-console.log(linkedList.size);
 console.log(linkedList.contains(0));
 console.log(linkedList.contains("First!"));
 console.log(linkedList.contains("Third"));
+console.log(linkedList.find("Not here!"));
+console.log(linkedList.find("First!"));
+console.log(linkedList.pop());
+console.log(linkedList.list);
+console.log(linkedList.size);
