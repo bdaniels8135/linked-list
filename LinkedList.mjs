@@ -43,14 +43,14 @@ class LinkedList {
   }
 
   at(index) {
-    if (index < 0) return null;
+    if (index < 0 || index > this.size - 1) return null;
     let currentNode = this.#head;
     let currentIndex = 0;
     while (currentNode.nextNode != null && currentIndex < index) {
       currentNode = currentNode.nextNode;
       currentIndex += 1;
     }
-    return index === currentIndex ? currentNode.value : null;
+    return currentNode.value;
   }
 
   pop() {
