@@ -74,6 +74,7 @@ class LinkedList {
   shift() {
     const oldHead = this.#head;
     this.#head = this.#head.nextNode;
+    this.#size -= 1;
     return oldHead.value;
   }
 
@@ -121,14 +122,12 @@ class LinkedList {
   }
 
   removeAt(index) {
-    if (index < 0 || index >= this.#size) {
-      return null;
-    }
-    this.#size += 1;
-    const nodeToInsertAfter = this.#at(index - 1);
-    const nodeToInsertBefore = nodeToInsertAfter.nextNode;
-    const newNode = new Node(value, nodeToInsertBefore);
-    nodeToInsertAfter.nextNode = newNode;
+    if (index < 0 || index >= this.#size) return null;
+    if (index === 0) return this.shift();
+    this.#size -= 1;
+    const nodeToRemoveAfter = this.#at(index - 1);
+    const nodeToRemove = nodeToRemoveAfter.nextNode;
+    nodeToRemoveAfter.nextNode = nodeToRemove.nextNode;
     return this;
   }
 }
@@ -156,4 +155,6 @@ linkedList
 console.log(linkedList.toString());
 console.log(linkedList.size);
 console.log(linkedList.shift());
+linkedList.removeAt(2);
 console.log(linkedList.toString());
+console.log(linkedList.size);
