@@ -1,6 +1,6 @@
 import Node from "./Node.mjs";
 
-class LinkedList {
+export default class LinkedList {
   #head;
 
   #tail;
