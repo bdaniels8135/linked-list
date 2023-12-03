@@ -54,6 +54,7 @@ class LinkedList {
     }
     prevNode.nextNode = null;
     this.#tail = prevNode;
+    this.#size -= 1;
     return currentNode.value;
   }
 
@@ -84,3 +85,4 @@ console.log(linkedList.at(1));
 console.log(linkedList.at(4));
 console.log(linkedList.pop());
 console.log(linkedList.list);
+console.log(linkedList.size);
